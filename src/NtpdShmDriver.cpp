@@ -129,7 +129,7 @@ void NtpdShmDriver::time_ref_cb(const sensor_msgs::msg::TimeReference::SharedPtr
    * date -d @1234567890: Sat Feb 14 02:31:30 MSK 2009
    */
   const rclcpp::Time magic_date(1234567890ULL, 0);
-  if (fixup_date_.as_bool() && clock->now() < magic_date) {
+  if (fixup_date_.as_bool() && clock->now().seconds() < magic_date.seconds()) {
     rclcpp::Time time_ref_(time_ref);
     set_system_time(time_ref_.seconds());
   }
